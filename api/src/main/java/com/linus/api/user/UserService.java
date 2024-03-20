@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-@Service
+
 public interface UserService {
   String addUsers();
   String login(User user);

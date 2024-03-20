@@ -2,12 +2,14 @@ package com.linus.api.user;
 
 import com.linus.api.enums.Messenger;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
   private final UserRepository repository;
