@@ -1,48 +1,23 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
-const SERVER = "http://localhost:8080";
+const SERVER = "http://localhost:8080/api";
 
 
-export default function Join() {
+export default function Login() {
   const [username, setUsername] = useState("");
   const[password,setPassword]=useState("")
-  const[name,setName]=useState("");
-  const[phone,setPhone]=useState("");
-  const[address,setAddress]=useState("");
-  const[job,setjob]=useState("");
-  const[height,setHeight]=useState("");
-  const[weight,setWeight]=useState("");
   const handleUsername = (e : any)=>{
     setUsername(e.target.value)
   }
   const handlePassword = (e : any)=>{
     setPassword(e.target.value)
   }
-  const handleName = (e : any)=>{
-    setName(e.target.value)
-  }
-  const handlePhone = (e : any)=>{
-    setPhone(e.target.value)
-  }
-  const handleAddress = (e : any)=>{
-    setAddress(e.target.value)
-  }
-  const handleJob = (e : any)=>{
-    setjob(e.target.value)
-  }
-  const handleHeight = (e : any)=>{
-    setHeight(e.target.value)
-  }
-  const handleWeight = (e : any)=>{
-    setWeight(e.target.value)
-  }
-
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/join`
-    const data = { username, password, name, phone, job, height, weight };
+    const url = `${SERVER}/login`
+    const data = { username,password};
     const config = {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",
@@ -51,56 +26,33 @@ export default function Join() {
     }
 
     axios.post(url, data, {headers: config}).then(res => {
-      alert("리스판스가 가져온 이름: " + JSON.stringify(res.data.username))
-      alert("리스판스가 가져온 비밀번호:"+JSON.stringify(res.data.password))
-    })
-  }
+      const message = res.data.message
+      alert((message))
 
-  const defaultCheck = ""
+    //   if(message == FAIL){
+    //     
+    // }else if (!optUser.getPassword().equals(paramMap.get("password"))){
+    //     System.out.println(Messenger.WRONG_PASSWORD);
+    //     map.put("message", Messenger.WRONG_PASSWORD);
+    // }else {
+    //     System.out.println(Messenger.SUCCESS);
+    //     map.put("message", Messenger.SUCCESS);
+    //     System.out.println("ID is "+ optUser.getId());
+    //     System.out.println("PW is "+ optUser.getPassword());
+    //     System.out.println("User is "+null);
+    // }
+    })
+
+  }
 
   return (
     <>
-    <div className="container">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr/>
-
-    <label htmlFor="username"><b>ID</b></label>
-    <input type="text" placeholder="Enter username" name="username" required onChange={handleUsername}/>
-    <br /><hr />
-    <label htmlFor="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required onChange={handlePassword}/>
-    <br /><hr />
-    <label htmlFor="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter name" name="name" required onChange={handleName}/>
-    <br /><hr />
-    <label htmlFor="phone"><b>Phone</b></label>
-    <input type="text" placeholder="Enter phone" name="phone" required onChange={handlePhone}/>
-    <br /><hr />
-    <label htmlFor="address"><b>Address</b></label>
-    <input type="text" placeholder="Enter address" name="address" required onChange={handleAddress}/>
-    <br /><hr />
-    <label htmlFor="job"><b>Job</b></label>
-    <input type="text" placeholder="Enter job" name="job" required onChange={handleJob}/>
-    <br /><hr />
-    <label htmlFor="height"><b>Height</b></label>
-    <input type="Double" placeholder="Enter height" name="height" required onChange={handleHeight}/>
-    <br /><hr />
-    <label htmlFor="weight"><b>Weight</b></label>
-    <input type="Double" placeholder="Enter weight" name="weight" required onChange={handleWeight}/>
-    <br /><hr />
-
-    <label>
-      <input type="checkbox" checked = {true} name="remember" style={{marginBottom : '15px'}}/> Remember me
-    </label>
-    
-    <p>By creating an account you agree to our <a href="#" style={{color : 'dodgerblue'}}>Terms & Privacy</a>.</p>
-
-    <div className="clearfix">
-      <button type="button" className="cancelbtn">Cancel</button>
-      <button type="submit" className="signupbtn" onClick={handleSubmit}>Sign Up</button>
-    </div>
-    </div>
+    <p>아이디 입력</p>
+    <input type="email" onChange={handleUsername} />
+    <p>비밀번호 입력</p>
+    <input type="password" onChange={handlePassword}></input>
+    <br />
+    <button onClick={handleSubmit}>전송</button>
     </>
   );
 }
