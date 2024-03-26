@@ -1,6 +1,7 @@
 'use client'
-
+import axios from "axios";
 import { useRouter } from "next/navigation";
+const SERVER = 'http://localhost:8080';
 
 interface IArticle{
     id: number,
@@ -23,6 +24,25 @@ const Article = (v: IArticle)=>{
 
 export default function Articles(){
     const router = useRouter();
+    const url = `${SERVER}/articles`
+    const config = {
+      headers:{
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+         Authorization: `Bearer blah ~` ,
+        "Access-Control-Allow-Origin": "*",
+    }}
+    axios.get(url, config)
+    .then(res =>{
+        const message = res.data.message
+      alert((message))
+      if(message === 'SUCCESS'){
+       alert("게시글이 있습니다")
+      }else if(message === 'FAIL'){
+        alert("게시글이 없습니다")
+      }else alert("지정되지 않은 값")
+      
+    })
     const article = [
         {id : 1, title : '', content : '', writer : '', registerDate : ''}    
     ]
