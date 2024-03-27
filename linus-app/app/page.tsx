@@ -3,7 +3,6 @@
 import { useState } from "react"
 import axios from 'axios';
 import Link from "next/link";
-import './globals.css'
 const SERVER = 'http://localhost:8080';
 export default function Home() {
   const [name, setName] = useState('')
