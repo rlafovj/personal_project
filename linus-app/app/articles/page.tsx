@@ -1,5 +1,6 @@
 'use client'
 import axios from "axios";
+import { DataGrid } from '@mui/x-data-grid';
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const SERVER = 'http://localhost:8080';
@@ -12,16 +13,16 @@ interface IArticle{
     registerDate: string
 }
 
-const Article = (v: IArticle)=>{
-    return(
-        <tr key={v.id}>
-            <td>{v.title}</td>
-            <td>{v.content}</td>
-            <td>{v.writer}</td>
-            <td>{v.registerDate}</td>
-        </tr>
-    )
-}
+// const Article = (v: IArticle)=>
+//     (
+        // <tr key={v.id}>
+        //     <td>{v.title}</td>
+        //     <td>{v.content}</td>
+        //     <td>{v.writer}</td>
+        //     <td>{v.registerDate}</td>
+        // </tr>
+//     )
+
 
 export default function Articles(){
     const router = useRouter();
@@ -42,10 +43,6 @@ useEffect(()=>{
       console.log((message))
       if(message === 'SUCCESS'){
         console.log("게시글이 있습니다")
-        const array = res.data.result
-        for(let value of array){
-            console.log(value)
-        }
         setArticles(res.data.result)
       }else if(message === 'FAIL'){
         console.log("게시글이 없습니다")
@@ -54,12 +51,12 @@ useEffect(()=>{
     })
 }, [])
 
-   
+
     const article = [
         {id : 1, title : '', content : '', writer : '', registerDate : ''}    
     ]
 
-    const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
+    // const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
 
     return (<>
         <h2>게시판</h2>
@@ -73,7 +70,14 @@ useEffect(()=>{
         </tr>
         </thead>
         <tbody>
-        {articleList}
+            {articles.map((v:IArticle)=>(
+                <tr key={v.id}>
+                <td>{v.title}</td>
+                <td>{v.content}</td>
+                <td>{v.writer}</td>
+                <td>{v.registerDate}</td>
+            </tr>
+            ))}
         </tbody>
         </table>
     </>)
