@@ -34,12 +34,13 @@ export default function Companise(){
     return (<>
         <h2>게시판</h2>
         <table>
+        <thead>
             <tr>
         <th>Company</th>
         <th>Contact</th>
         <th>Country</th>
         </tr>
-        <thead></thead>
+        </thead>
         <tbody>
         {companyList}
         </tbody>

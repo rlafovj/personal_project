@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 const SERVER = 'http://localhost:8080';
 
 interface IArticle{
@@ -24,7 +25,8 @@ const Article = (v: IArticle)=>{
 
 export default function Articles(){
     const router = useRouter();
-    const url = `${SERVER}/articles`
+    const [articles, setArticles] = useState([])
+    const url = `${SERVER}/api/articles`
     const config = {
       headers:{
         "Cache-Control": "no-cache",
@@ -32,33 +34,44 @@ export default function Articles(){
          Authorization: `Bearer blah ~` ,
         "Access-Control-Allow-Origin": "*",
     }}
+
+useEffect(()=>{
     axios.get(url, config)
     .then(res =>{
         const message = res.data.message
-      alert((message))
+      console.log((message))
       if(message === 'SUCCESS'){
-       alert("게시글이 있습니다")
+        console.log("게시글이 있습니다")
+        const array = res.data.result
+        for(let value of array){
+            console.log(value)
+        }
+        setArticles(res.data.result)
       }else if(message === 'FAIL'){
-        alert("게시글이 없습니다")
-      }else alert("지정되지 않은 값")
+        console.log("게시글이 없습니다")
+      }else console.log("지정되지 않은 값")
       
     })
+}, [])
+
+   
     const article = [
         {id : 1, title : '', content : '', writer : '', registerDate : ''}    
     ]
 
-    const articleList = article.map((v) => (<Article {...v}/>))
+    const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
 
     return (<>
         <h2>게시판</h2>
         <table>
+        <thead>
             <tr>
         <th>title</th>
         <th>content</th>
         <th>writer</th>
         <th>registerDate</th>
         </tr>
-        <thead></thead>
+        </thead>
         <tbody>
         {articleList}
         </tbody>
