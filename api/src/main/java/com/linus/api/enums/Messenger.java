@@ -1,5 +1,6 @@
 package com.linus.api.enums;
 
 public enum Messenger {
-  SUCCESS, FAIL, SQL_ERROR
+    SUCCESS, SQL_ERROR, FAIL, WRONG_PASSWORD
+
 }

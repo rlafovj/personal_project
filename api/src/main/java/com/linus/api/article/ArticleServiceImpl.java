@@ -1,57 +1,17 @@
-package com.linus.api.Article;
+package com.linus.api.article;
 
-import com.linus.api.common.AbstractService;
-import com.linus.api.enums.Messenger;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
-public class ArticleServiceImpl extends AbstractService implements ArticleService {
-  private ArticleRepository articleRepository;
-  private static ArticleServiceImpl instance = new ArticleServiceImpl();
-  private ArticleServiceImpl(){
-    articleRepository = ArticleRepository.getInstance();
-  }
-  public static ArticleServiceImpl getInstance(){return instance;}
+@Service
+@RequiredArgsConstructor
+public class ArticleServiceImpl implements ArticleService {
+    private final ArticleRepository repository;
 
-  @Override
-  public void findAllPost() throws SQLException {
-    articleRepository.findAllPost();
-  }
-
-  @Override
-  public Messenger save(Object o) {
-    return null;
-  }
-
-  @Override
-  public List<?> findAll() throws SQLException {
-    return articleRepository.findAll();
-  }
-
-  @Override
-  public Optional<?> findById(Long id) {
-    return Optional.empty();
-  }
-
-  @Override
-  public String count() {
-    return null;
-  }
-
-  @Override
-  public Optional<?> getOne(String id) {
-    return Optional.empty();
-  }
-
-  @Override
-  public String delete(Object o) {
-    return null;
-  }
-
-  @Override
-  public Boolean existsById(Long id) {
-    return null;
-  }
+    @Override
+    public List<Article> findAll() {
+        return repository.findAll();
+    }
 }

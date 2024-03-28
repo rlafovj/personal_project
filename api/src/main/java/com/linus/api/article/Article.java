@@ -1,23 +1,42 @@
-package com.linus.api.Article;
+package com.linus.api.article;
 
-import lombok.Builder;
-import lombok.ToString;
+import com.linus.api.board.Board;
+import jakarta.persistence.*;
+import lombok.*;
 
-@ToString
+@Entity(name= "ARTICLES")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@ToString(exclude = {"id"})
 
 public class Article {
-  private Long id;
-  private String title;
-  private String content;
-  private String writer;
-  private String registerDate;
+    @Id
+    @Column(name= "ID",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Builder(builderMethodName = "builder")
-  public Article(Long id, String title, String content, String  writer, String registerDate){
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.writer = writer;
-    this.registerDate = registerDate;
-  }
+    @ManyToOne
+    @JoinColumn(name = "BOARD_ID")
+    private Board board;
+
+    @Column(name= "TITLE")
+    private String title;
+
+    @Column(name= "CONTENT")
+    private String content;
+
+    @Column(name= "WRITER")
+    private String writer;
+
+    @Column(name= "REGISTERDATE")
+    private String registerDate;
+
+    @Builder(builderMethodName = "builder")
+    public Article(Long id, String title, String content, String writer, String registerDate) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.registerDate = registerDate;
+    }
 }
