@@ -1,9 +1,14 @@
 'use client'
 import axios from "axios";
-import { DataGrid } from '@mui/x-data-grid';
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-const SERVER = 'http://localhost:8080';
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {Button, Input} from '@mui/material'
+import { API } from "@/app/atoms/enums/API";
+import AxiosConfig from "@/app/organisms/configs/axios-config";
+import MuiDemoRows from "@/app/organisms/rows/mui-demo-rows";
+import MuiDemoColumns from "@/app/organisms/columns/mui-demo-columns";
 
 interface IArticle{
     id: number,
@@ -27,17 +32,9 @@ interface IArticle{
 export default function Articles(){
     const router = useRouter();
     const [articles, setArticles] = useState([])
-    const url = `${SERVER}/api/articles`
-    const config = {
-      headers:{
-        "Cache-Control": "no-cache",
-        "Content-Type": "application/json",
-         Authorization: `Bearer blah ~` ,
-        "Access-Control-Allow-Origin": "*",
-    }}
 
 useEffect(()=>{
-    axios.get(url, config)
+    axios.get(`${API.SERVER}/articles`, AxiosConfig())
     .then(res =>{
         const message = res.data.message
       console.log((message))
@@ -59,26 +56,22 @@ useEffect(()=>{
     // const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
 
     return (<>
-        <h2>게시판</h2>
-        <table>
-        <thead>
-            <tr>
-        <th>title</th>
-        <th>content</th>
-        <th>writer</th>
-        <th>registerDate</th>
-        </tr>
-        </thead>
-        <tbody>
-            {articles.map((v:IArticle)=>(
-                <tr key={v.id}>
-                <td>{v.title}</td>
-                <td>{v.content}</td>
-                <td>{v.writer}</td>
-                <td>{v.registerDate}</td>
-            </tr>
-            ))}
-        </tbody>
-        </table>
+        <h2>게시글 목록</h2>
+        <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={MuiDemoRows()}
+        columns={MuiDemoColumns()}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+    </Box>
     </>)
 }

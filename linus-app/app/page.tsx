@@ -3,7 +3,10 @@
 import { useState } from "react"
 import axios from 'axios';
 import Link from "next/link";
-const SERVER = 'http://localhost:8080';
+import './style.css'
+import { PG } from "./atoms/enums/PG";
+import { API } from "./atoms/enums/API";
+import AxiosConfig from "./organisms/configs/axios-config";
 export default function Home() {
   const [name, setName] = useState('')
   const handleChange = (e:any)=>{
@@ -11,29 +14,23 @@ export default function Home() {
   }
   const handleClick = ()=>{
     alert('리퀘스트가 가져가는 이름 : '+name)
-    const url = `${SERVER}/name`
-    const data = {'name': name}
-    const config = {
-      headers:{
-        "Cache-Control": "no-cache",
-        "Content-Type": "application/json",
-         Authorization: `Bearer blah ~` ,
-        "Access-Control-Allow-Origin": "*",
-    }}
-    axios.post(url, data, config)
+    axios.post(`${API.SERVER}/name`, {'name': name}, AxiosConfig())
     .then((res)=>{
       alert("리스폰스가 가져온 이름 : "+JSON.stringify(res.data))
     }
     )
   }
   return<div className="text-center">
-  <div>Welcome</div><br />
-  <h3>이름을 입력하세요</h3><br />
+  <div>Welcome</div>
+  <h3>이름을 입력하세요</h3>
   <input type="text" onChange={handleChange} /><br />
-  <button onClick={handleClick}>전송</button><br /><br />
-  <Link href={'/login'}>로그인</Link><br />
-  <Link href={"/join"}>회원가입</Link><br />
-  <Link href={'/mui-demo'}>MUI 데모</Link><br />
+  <button onClick={handleClick}>전송</button><br />
+  <Link href={`${PG.USER}/login`}>로그인</Link><br />
+  <Link href={`${PG.USER}/join`}>회원가입</Link><br />
+  <Link href={`${PG.DEMO}/mui-demo`}>MUI 데모</Link><br />
+  <Link href={`${PG.DEMO}/counter`}>카운터 데모</Link><br />
+  <Link href={`${PG.DEMO}/counter/container`}>REDUX 데모</Link><br />
+
 
   </div>
 }

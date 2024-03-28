@@ -1,10 +1,10 @@
 "use client";
+import { API } from "@/app/atoms/enums/API";
+import AxiosConfig from "@/app/organisms/configs/axios-config";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const SERVER = "http://localhost:8080";
-
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -18,20 +18,9 @@ export default function Login() {
   const router = useRouter();
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/api/login`
-    const data = { username,password};
-    const config = {
-      "Cache-Control": "no-cache",
-      "Content-Type": "application/json",
-      Authorization: "Bearer blah ~",
-      "Access-Control-Allow-Origin": "*",
-    }
-
-    axios.post(url, data, {headers: config}).then(res => {
+    axios.post(`${API.SERVER}/login`, {username,password}, AxiosConfig()).then(res => {
       const message = res.data.message
       alert((message))
-
       if(message === 'SUCCESS'){
         router.push('/articles');
       }
