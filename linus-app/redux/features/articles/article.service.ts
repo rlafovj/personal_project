@@ -7,10 +7,13 @@ import AxiosConfig, { instance } from "@/redux/common/configs/axios-config"
 
 export const getArticles: any = createAsyncThunk('articles/getAllArticles',
     async(page: number) => {
-        const {message, result}:any = await getAllArticlesAPI(page)
-        console.log('------API 를 사용한 경우 ------')
-        console.log('message' + message)
-        console.log(JSON.stringify(result))
+        const data:any = await getAllArticlesAPI(page)
+        const {message, result}:any = data
+        // console.log('------API 를 사용한 경우 ------')
+        // console.log('message' + message)
+        // console.log(JSON.stringify(result))
+        
+        return data
 
     //     try {
     //         instance(`/all-articles`, AxiosConfig())
