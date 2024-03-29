@@ -2,13 +2,13 @@
 import axios from "axios";
 import { useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
-import { API } from "@/app/atoms/enums/API";
-import AxiosConfig from "@/app/organisms/configs/axios-config";
+import { API } from "@/redux/common/enums/API";
+import AxiosConfig from "@/redux/common/configs/axios-config";
+import { NextPage } from "next";
 // import '../style.css';
 
 
-
-export default function Join() {
+const JoinPage : NextPage = () => {
   const [username, setUsername] = useState("");
   const[password,setPassword]=useState("")
   const[name,setName]=useState("");
@@ -47,7 +47,7 @@ export default function Join() {
     alert("리퀘스트가 가져가는 아이디 : " + username);
     axios.post(`${API.SERVER}/join`, { username, password, name, phone, address, job, height, weight }, AxiosConfig()).then(res => {
       alert("리스판스가 가져온 정보 : " + JSON.stringify(res.data))
-      router.push('/login');
+      router.push('./login');
     })
   }
 
@@ -86,7 +86,7 @@ export default function Join() {
     <br /><hr />
 
     <label>
-      <input type="checkbox" checked = {true} name="remember" style={{marginBottom : '15px'}}/> Remember me
+      <input type="checkbox" name="remember" style={{marginBottom : '15px'}}/> Remember me
     </label>
     
     <p>By creating an account you agree to our <a href="#" style={{color : 'dodgerblue'}}>Terms & Privacy</a>.</p>
@@ -99,3 +99,5 @@ export default function Join() {
     </>
   );
 }
+
+export default JoinPage

@@ -1,12 +1,13 @@
 'use client'
 
-import CompaniseColumns from "@/app/organisms/columns/companise-columns";
-import CompaniseRows from "@/app/organisms/rows/companise-rows";
+import CompaniseColumns from "@/app/components/columns/companise-columns";
+import CompaniseRows from "@/app/components/rows/companise-rows";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 
-export default function Companise(){
+const CompanisePage : NextPage = () => {
     const router = useRouter(); 
 
     return (
@@ -28,3 +29,5 @@ export default function Companise(){
         </Box>
       );
 }
+
+export default CompanisePage

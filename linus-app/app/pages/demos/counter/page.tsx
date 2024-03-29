@@ -14,9 +14,9 @@ export default function Counter(){
 
 
     return (<div className="text-center">
-    <h1 className="text-8xl">Counter : {count}</h1>
-    <Button onClick={handlePlus} className="text-8xl">+</Button><br />
-    <Button onClick={handleMinus}className="text-8xl">-</Button>
+    <h1>Counter : {count}</h1>
+    <Button onClick={handlePlus}>+</Button><br />
+    <Button onClick={handleMinus}>-</Button>
 
     </div>)
 }

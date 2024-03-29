@@ -5,18 +5,13 @@ import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {Button, Input} from '@mui/material'
-import { API } from "@/app/atoms/enums/API";
-import AxiosConfig from "@/app/organisms/configs/axios-config";
-import MuiDemoRows from "@/app/organisms/rows/mui-demo-rows";
-import MuiDemoColumns from "@/app/organisms/columns/mui-demo-columns";
-
-interface IArticle{
-    id: number,
-    title: string,
-    content: string,
-    writer: string,
-    registerDate: string
-}
+import { API } from "@/redux/common/enums/API";
+import AxiosConfig from "@/redux/common/configs/axios-config";
+import MuiDemoRows from "@/app/components/rows/mui-demo-rows";
+import MuiDemoColumns from "@/app/components/columns/mui-demo-columns";
+import { NextPage } from "next";
+import { getArticles } from "@/redux/features/articles/article.service";
+import { useDispatch } from "react-redux"
 
 // const Article = (v: IArticle)=>
 //     (
@@ -29,23 +24,13 @@ interface IArticle{
 //     )
 
 
-export default function Articles(){
+const ArticlesPage : NextPage = () => {
     const router = useRouter();
+    const dispatch = useDispatch()
     const [articles, setArticles] = useState([])
 
 useEffect(()=>{
-    axios.get(`${API.SERVER}/articles`, AxiosConfig())
-    .then(res =>{
-        const message = res.data.message
-      console.log((message))
-      if(message === 'SUCCESS'){
-        console.log("게시글이 있습니다")
-        setArticles(res.data.result)
-      }else if(message === 'FAIL'){
-        console.log("게시글이 없습니다")
-      }else console.log("지정되지 않은 값")
-      
-    })
+  dispatch(getArticles())
 }, [])
 
 
@@ -75,3 +60,5 @@ useEffect(()=>{
     </Box>
     </>)
 }
+
+export default ArticlesPage

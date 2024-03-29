@@ -1,12 +1,13 @@
 "use client";
-import { API } from "@/app/atoms/enums/API";
-import AxiosConfig from "@/app/organisms/configs/axios-config";
+import { API } from "@/redux/common/enums/API";
+import AxiosConfig from "@/redux/common/configs/axios-config";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { NextPage } from "next";
 
-export default function Login() {
+const LoginPage : NextPage = () => {
   const [username, setUsername] = useState("");
   const[password,setPassword]=useState("")
   const handleUsername = (e : any)=>{
@@ -22,7 +23,7 @@ export default function Login() {
       const message = res.data.message
       alert((message))
       if(message === 'SUCCESS'){
-        router.push('/articles');
+        router.push('/pages/boards/articles');
       }
     //else if (message === 'WRONG_PASSWORD');
     //     map.put("message", Messenger.WRONG_PASSWORD);
@@ -44,3 +45,5 @@ export default function Login() {
     </>
   );
 }
+
+export default LoginPage
