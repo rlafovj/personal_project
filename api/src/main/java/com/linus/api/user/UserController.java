@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import static com.linus.api.enums.Messenger.FAIL;
+import static com.linus.api.enums.Messenger.SUCCESS;
 
 @CrossOrigin(origins ="http://localhost:3000/")
 @RestController
@@ -45,7 +46,7 @@ public class UserController {
 //        map.put("password","입력한 비밀번호는"+password);
 //        return map;
     }
-    @PostMapping(path="/api/users")
+    @PostMapping(path="/api/join")
     public Map<String,?> join(@RequestBody Map<String,?> paramMap){
         String strHeight = String.valueOf(paramMap.get("height"));
         String strWeight = String.valueOf(paramMap.get("weight"));
@@ -64,6 +65,14 @@ public class UserController {
         Map<String,Messenger> map = new HashMap<>();
         map.put("result",Messenger.SUCCESS);
         return map;
+    }
+    @GetMapping("/api/all-users")
+    public Map<String, ?> findAllUsers(){
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("message", SUCCESS);
+        List<User> userList = service.findAll();
+        userMap.put("users", userList);
+        return userMap;
     }
 
     public Map<String,?> addUsers(@RequestBody Map<String,?>map) {

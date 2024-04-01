@@ -17,7 +17,7 @@ import java.util.Map;
 public class ArticleController {
   private final com.linus.api.article.ArticleService service;
 
-  @GetMapping("/api/articles")
+  @GetMapping("/api/all-articles")
   public Map<?,?> findAll() throws SQLException{
     Map<String, Object> map = new HashMap<>();
     map.put("message", Messenger.SUCCESS);

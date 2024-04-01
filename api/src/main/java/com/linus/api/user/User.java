@@ -46,16 +46,16 @@ public class User {
     private String job;
 
     @Column(name= "HEIGHT")
-    private double height;
+    private Double height;
 
     @Column(name= "WEIGHT")
-    private double weight;
+    private Double weight;
 
     @Builder(builderMethodName = "builder")
     public User(Long id, String username, String password,
                 String name, String phone,
                 String address, String job,
-                double height, double weight) {
+                Double height, Double weight) {
         this.id = id;
         this.username = username;
         this.password = password;
