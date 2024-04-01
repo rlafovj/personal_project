@@ -30,7 +30,7 @@ import { IArticle } from "@/redux/features/articles/article.model";
 const ArticlesPage : NextPage = () => {
     const router = useRouter();
     const dispatch = useDispatch()
-    const [articles, setArticles] = useState([])
+    // const [articles, setArticles] = useState([]) //state는 redux에서 처리했기 때문에 react에서 useState할 필요가 없음
     const allArticles: [] = useSelector(getAllArticles)
 
     if(allArticles !== undefined){
@@ -44,9 +44,9 @@ const ArticlesPage : NextPage = () => {
       console.log('allArticles is undefined')
   }
 
-useEffect(()=>{
-  dispatch(fetchAllArticles())
-}, [])
+  useEffect(()=>{
+    dispatch(fetchAllArticles())
+  }, [])
 
 
     // const article = [

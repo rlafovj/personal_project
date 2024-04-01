@@ -1,4 +1,4 @@
-interface IUser{
+export interface IUser{
     id: number,
     username: string,
     password: string,
@@ -6,6 +6,7 @@ interface IUser{
     phone: string,
     address: string,
     job: string,
-    height: string,
-    weight: string
+    height: number,
+    weight: number,
+    array: []
 }
