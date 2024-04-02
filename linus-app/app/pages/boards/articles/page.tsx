@@ -15,6 +15,7 @@ import { getAllArticles } from "@/redux/features/articles/article.slice"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux";
 import { IArticle } from "@/redux/features/articles/article.model";
+import Columns from "@/app/components/articles/columns";
 
 // const Article = (v: IArticle)=>
 //     (
@@ -27,7 +28,7 @@ import { IArticle } from "@/redux/features/articles/article.model";
 //     )
 
 
-const ArticlesPage : NextPage = () => {
+const ArticlesPage : NextPage = ({data}:any) => {
     const router = useRouter();
     const dispatch = useDispatch()
     // const [articles, setArticles] = useState([]) //state는 redux에서 처리했기 때문에 react에서 useState할 필요가 없음
@@ -57,26 +58,22 @@ const ArticlesPage : NextPage = () => {
 
     return (<>
         <h2>개인페이지 Article</h2>
-        <table border={1}>
-            <thead>
-                <tr>
-                    <th>title</th>
-                    <th>content</th>
-                    <th>writer</th>
-                    <th>registerDate</th>
-                </tr>
-            </thead>
-            <tbody>
-                {allArticles?.map((props: IArticle) => (
-                    <tr key={props.id}>
-                        <td>{props.title}</td>
-                        <td>{props.content}</td>
-                        <td>{props.writer}</td>
-                        <td>{props.registerDate}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={data}
+        columns={Columns()}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+    </Box>
     </>)
 }
 

@@ -15,13 +15,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 
-// const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
+const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const pageMap = [{key:'회원가입', value:'pages/users/join'}, 
-{key: '로그인', value: 'pages/users/login'}, 
-{key: '카운터', value: 'pages/demos/counter'}, 
-{key: '게시글목록', value: 'pages/boards/page'}, 
-{key: '사용자목록', value: 'pages/users/userList'}]
+// const pageMap = [{key:'회원가입', value:'pages/users/join'}, 
+// {key: '로그인', value: 'pages/users/login'}, 
+// {key: '카운터', value: 'pages/demos/counter'}, 
+// {key: '게시글목록', value: 'pages/boards/page'}, 
+// {key: '사용자목록', value: 'pages/users/userList'}]
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
