@@ -1,6 +1,7 @@
 package com.linus.api.article;
 
 import com.linus.api.board.Board;
+import com.linus.api.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,14 +26,15 @@ public class Article {
     @Column(name= "CONTENT")
     private String content;
 
-    @Column(name= "WRITER")
-    private String writer;
+    @ManyToOne
+    @JoinColumn(name= "USER_ID")
+    private User writer;
 
-    @Column(name= "REGISTERDATE")
+    @Column(name= "REGISTER_DATE")
     private String registerDate;
 
     @Builder(builderMethodName = "builder")
-    public Article(Long id, String title, String content, String writer, String registerDate) {
+    public Article(Long id, String title, String content, User writer, String registerDate) {
         this.id = id;
         this.title = title;
         this.content = content;

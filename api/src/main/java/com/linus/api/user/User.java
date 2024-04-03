@@ -1,6 +1,7 @@
 package com.linus.api.user;
 
 import com.linus.api.account.Account;
+import com.linus.api.article.Article;
 import com.linus.api.board.Board;
 import com.linus.api.order.Order;
 import jakarta.persistence.*;
@@ -20,6 +21,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Board> board;
+
+    @OneToMany(mappedBy = "writer")
+    private List<Article> articles;
 
     @OneToMany(mappedBy = "user")
     private List<Account> account;
