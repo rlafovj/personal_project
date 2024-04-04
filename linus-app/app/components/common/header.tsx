@@ -13,8 +13,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { PG } from '@/redux/common/enums/PG';
+import { useRouter } from 'next/navigation';
 
-
+const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`,`${PG.USER}/list`]
 const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 // const pageMap = [{key:'회원가입', value:'pages/users/join'}, 
@@ -32,9 +34,27 @@ function Header() {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+  const router = useRouter();
 
   const handleCloseNavMenu = (event: any) => {
-    alert('클릭한 메뉴 : '+event.target.value)
+    alert('클릭한 메뉴 : '+event.target.innerText)
+    switch (event.target.innerText){
+      case ("회원가입"):
+        router.push(link[0])
+        break
+      case ("로그인"):
+        router.push(link[1])
+        break
+      case ("카운터"):
+        router.push(link[2])
+        break
+      case ("게시글목록"):
+        router.push(link[3])
+        break
+      case ("사용자목록"):
+        router.push(link[4])
+        break
+    }
   };
 
   const handleCloseUserMenu = () => {

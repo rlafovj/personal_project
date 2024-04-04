@@ -8,7 +8,7 @@ import {Button, Input} from '@mui/material'
 import { API } from "@/redux/common/enums/API";
 import AxiosConfig from "@/redux/common/configs/axios-config";
 import MuiDemoRows from "@/app/components/rows/mui-demo-rows";
-import MuiDemoColumns from "@/app/components/columns/mui-demo-columns";
+import MuiDemoColumns from "@/app/components/demos/mui-demo-columns";
 import { NextPage } from "next";
 import { fetchAllArticles } from "@/redux/features/articles/article.service";
 import { getAllArticles } from "@/redux/features/articles/article.slice"

@@ -1,5 +1,5 @@
 export const enum PG{
-    USER='pages/users',
-    BOARD='pages/boards',
-    DEMO='pages/demos'
+    USER='/pages/users',
+    BOARD='/pages/boards',
+    DEMO='/pages/demos'
 }

@@ -45,7 +45,7 @@ const JoinPage : NextPage = () => {
 
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    axios.post(`${API.SERVER}/join`, { username, password, name, phone, address, job, height, weight }, AxiosConfig()).then(res => {
+    axios.post(`${API.SERVER}/join`, { username, password, name, phone, address, job }, AxiosConfig()).then(res => {
       alert("리스판스가 가져온 정보 : " + JSON.stringify(res.data))
       router.push('./login');
     })
@@ -77,12 +77,6 @@ const JoinPage : NextPage = () => {
     <br /><hr />
     <label htmlFor="job"><b>Job</b></label>
     <input type="text" placeholder="Enter job" name="job" required onChange={handleJob}/>
-    <br /><hr />
-    <label htmlFor="height"><b>Height</b></label>
-    <input type="Double" placeholder="Enter height" name="height" required onChange={handleHeight}/>
-    <br /><hr />
-    <label htmlFor="weight"><b>Weight</b></label>
-    <input type="Double" placeholder="Enter weight" name="weight" required onChange={handleWeight}/>
     <br /><hr />
 
     <label>

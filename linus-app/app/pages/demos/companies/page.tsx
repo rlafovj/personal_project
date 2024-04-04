@@ -1,6 +1,6 @@
 'use client'
 
-import CompaniseColumns from "@/app/components/columns/companise-columns";
+import CompaniseColumns from "@/app/components/demos/companise-columns";
 import CompaniseRows from "@/app/components/rows/companise-rows";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
