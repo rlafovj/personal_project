@@ -30,17 +30,17 @@ const UserListPage : NextPage = () => {
         dispatch(getAllUsers())
     }, [])
     
-        const rows = [ 
-            { id: 1, username: "Snow", name: "Jon", phone: 35 },
-            { id: 2, username: "Lannister", name: "Cersei", phone: 42 },
-            { id: 3, username: "Lannister", name: "Jaime", phone: 45 },
-            { id: 4, username: "Stark", name: "Arya", phone: 16 },
-            { id: 5, username: "Targaryen", name: "Daenerys", phone: null },
-            { id: 6, username: "Melisandre", name: null, phone: 150 },
-            { id: 7, username: "Clifford", name: "Ferrara", phone: 44 },
-            { id: 8, username: "Frances", name: "Rossini", phone: 36 },
-            { id: 9, username: "Roxie", name: "Harvey", phone: 65 },
-          ];
+        // const rows = [ 
+        //     { id: 1, username: "Snow", name: "Jon", phone: 35 },
+        //     { id: 2, username: "Lannister", name: "Cersei", phone: 42 },
+        //     { id: 3, username: "Lannister", name: "Jaime", phone: 45 },
+        //     { id: 4, username: "Stark", name: "Arya", phone: 16 },
+        //     { id: 5, username: "Targaryen", name: "Daenerys", phone: null },
+        //     { id: 6, username: "Melisandre", name: null, phone: 150 },
+        //     { id: 7, username: "Clifford", name: "Ferrara", phone: 44 },
+        //     { id: 8, username: "Frances", name: "Rossini", phone: 36 },
+        //     { id: 9, username: "Roxie", name: "Harvey", phone: 65 },
+        //   ];
 
     return (<>
     <h2>회원 목록</h2>
@@ -63,7 +63,7 @@ const UserListPage : NextPage = () => {
 
         <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={getAllUsers}
         columns={UsersColumns()}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection

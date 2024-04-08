@@ -15,8 +15,6 @@ const JoinPage : NextPage = () => {
   const[phone,setPhone]=useState("");
   const[address,setAddress]=useState("");
   const[job,setjob]=useState("");
-  const[height,setHeight]=useState("");
-  const[weight,setWeight]=useState("");
   const handleUsername = (e : any)=>{
     setUsername(e.target.value)
   }
@@ -35,17 +33,11 @@ const JoinPage : NextPage = () => {
   const handleJob = (e : any)=>{
     setjob(e.target.value)
   }
-  const handleHeight = (e : any)=>{
-    setHeight(e.target.value)
-  }
-  const handleWeight = (e : any)=>{
-    setWeight(e.target.value)
-  }
   const router = useRouter();
 
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    axios.post(`${API.SERVER}/join`, { username, password, name, phone, address, job }, AxiosConfig()).then(res => {
+    axios.post(`${API.USER}/join`, {"users" : { username, password, name, phone, address, job }}, AxiosConfig()).then(res => {
       alert("리스판스가 가져온 정보 : " + JSON.stringify(res.data))
       router.push('./login');
     })

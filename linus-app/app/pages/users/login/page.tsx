@@ -19,7 +19,7 @@ const LoginPage : NextPage = () => {
   const router = useRouter();
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    axios.post(`${API.SERVER}/login`, {username,password}, AxiosConfig()).then(res => {
+    axios.post(`${API.USER}/login`, {username,password}, AxiosConfig()).then(res => {
       const message = res.data.message
       alert((message))
       if(message === 'SUCCESS'){
