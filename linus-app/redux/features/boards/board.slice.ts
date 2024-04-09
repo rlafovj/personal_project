@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./article.init";
-import {IArticle} from './article.model'
-import { findAllArticles } from "./article.service";
-import { findAllArticlesAPI } from "./article.api";
+import { initialState } from "./board.init";
+import {IBoard} from './board.model'
+import { findAllBoards } from "./board.service";
+import { findAllBoardsAPI } from "./board.api";
 
-const articleThunks = [findAllArticles]
+const boardThunks = [findAllBoards]
 
 const status = {
     pending: 'pending',
@@ -26,24 +26,24 @@ const handleRejected = (state : any) => {
     
 }
 
-export const articleSlice = createSlice({
-    name: "article",
+export const boardSlice = createSlice({
+    name: "board",
     initialState,
     reducers: {},
     extraReducers: builder => {
         const {pending,rejected} = status;
 
     builder
-      .addCase(findAllArticles.fulfilled,handleFulfilled)
+      .addCase(findAllBoards.fulfilled,handleFulfilled)
     }
   }
 )
 
-export const getAllArticles = (state: any) => {
+export const getAllBoards = (state: any) => {
   console.log('------------------ Before useSelector ---------------')
-  console.log(JSON.stringify(state.article.array))
-  return state.article.array;
+  console.log(JSON.stringify(state.board.array))
+  return state.board.array;
 }
 
-export const {} = articleSlice.actions
-export default articleSlice.reducer
+export const {} = boardSlice.actions
+export default boardSlice.reducer

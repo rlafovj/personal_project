@@ -16,14 +16,14 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { PG } from '@/redux/common/enums/PG';
 import { useRouter } from 'next/navigation';
 
-const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`,`${PG.USER}/list`]
-const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
+const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`, `${PG.ARTICLE}/list`,`${PG.USER}/list`]
+const pages = ['회원가입','로그인', '카운터', '게시판목록','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 // const pageMap = [{key:'회원가입', value:'pages/users/join'}, 
 // {key: '로그인', value: 'pages/users/login'}, 
 // {key: '카운터', value: 'pages/demos/counter'}, 
 // {key: '게시글목록', value: 'pages/boards/page'}, 
-// {key: '사용자목록', value: 'pages/users/userList'}]
+// {key: '사용자목록', value: 'pages/users/list'}]
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -48,11 +48,14 @@ function Header() {
       case ("카운터"):
         router.push(link[2])
         break
+        case ("게시판목록"):
+          router.push(link[3])
+        break
       case ("게시글목록"):
-        router.push(link[3])
+        router.push(link[4])
         break
       case ("사용자목록"):
-        router.push(link[4])
+        router.push(link[5])
         break
     }
   };

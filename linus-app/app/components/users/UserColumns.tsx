@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material"
 import {GridColDef} from "@mui/x-data-grid"
-import { UserColumn } from "./model/UserColumn"
+import { UserColumns } from "./model/columns"
 
 interface Celltype{
-    row : UserColumn
+    row : UserColumns
 }
 
 export default function UsersColumns(): GridColDef[]{

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllUsersAPI } from "./user.api";
+import { findAllUsersAPI } from "./user.api";
 
-export const getAllUsers: any = createAsyncThunk('users/getAllUsers',
+export const findAllUsers: any = createAsyncThunk('users/findAllUsers',
 async(page: number) => {
-    const data:any = await getAllUsersAPI(page)
+    const data:any = await findAllUsersAPI(page)
     const {message, users}:any = data
     return data
 }

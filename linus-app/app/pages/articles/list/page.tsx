@@ -10,12 +10,13 @@ import AxiosConfig from "@/redux/common/configs/axios-config";
 import MuiDemoRows from "@/app/components/rows/mui-demo-rows";
 import MuiDemoColumns from "@/app/components/demos/mui-demo-columns";
 import { NextPage } from "next";
-import { fetchAllArticles } from "@/redux/features/articles/article.service";
+import { findAllArticles } from "@/redux/features/articles/article.service";
 import { getAllArticles } from "@/redux/features/articles/article.slice"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux";
 import { IArticle } from "@/redux/features/articles/article.model";
-import Columns from "@/app/components/articles/columns";
+import Columns from "@/app/components/articles/ArticleColumns";
+import ArticlesColumns from "@/app/components/articles/ArticleColumns";
 
 // const Article = (v: IArticle)=>
 //     (
@@ -46,7 +47,7 @@ const ArticlesPage : NextPage = ({data}:any) => {
   }
 
   useEffect(()=>{
-    dispatch(fetchAllArticles())
+    dispatch(findAllArticles())
   }, [])
 
 
@@ -57,11 +58,11 @@ const ArticlesPage : NextPage = ({data}:any) => {
     // const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
 
     return (<>
-        <h2>개인페이지 Article</h2>
-        <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={data}
-        columns={Columns()}
+        <h2>게시글 목록</h2>
+        <Box sx={{ height: '100%', width: '100%' }}>
+      {allArticles && <DataGrid
+        rows={allArticles}
+        columns={ArticlesColumns()}
         initialState={{
           pagination: {
             paginationModel: {
@@ -72,7 +73,7 @@ const ArticlesPage : NextPage = ({data}:any) => {
         pageSizeOptions={[5]}
         checkboxSelection
         disableRowSelectionOnClick
-      />
+      />}
     </Box>
     </>)
 }
