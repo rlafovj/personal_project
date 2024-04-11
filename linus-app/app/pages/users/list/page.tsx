@@ -4,7 +4,9 @@ import UsersColumns from "@/app/components/users/UserColumns";
 import { IUser } from "@/redux/features/users/user.model";
 import { findAllUsers } from "@/redux/features/users/user.service";
 import { AllUsers } from "@/redux/features/users/user.slice";
-import { DataGrid } from "@mui/x-data-grid";
+import { Button } from "@mui/material";
+import { DataGrid, GridRowSelectionModel } from "@mui/x-data-grid";
+import axios from "axios";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,6 +16,7 @@ const UserListPage : NextPage = () => {
     const [pageSize, setPageSize] = useState(5);
     const dispatch = useDispatch();
     const allUsers: [] = useSelector(AllUsers)
+    const [selectedRows, setSelectedRows] = useState<GridRowSelectionModel>([]);
 
     if(allUsers !== undefined){
         console.log('Users is not undefined')
@@ -29,6 +32,11 @@ const UserListPage : NextPage = () => {
     useEffect(()=>{
         dispatch(findAllUsers())
     }, [])
+
+    const handleDelete = async () => {
+        await Promise.all(selectedRows.map(id => axios.delete(`http://localhost:8080/api/users/delete/${id}`)));
+        dispatch(findAllUsers(1));
+    };
     
         // const rows = [ 
         //     { id: 1, username: "Snow", name: "Jon", phone: 35 },
@@ -46,9 +54,13 @@ const UserListPage : NextPage = () => {
     <h2>회원 목록</h2>
 
         <div style={{ height: '100%', width: "100%" }}>
+        <Button onClick={handleDelete}>삭제</Button>
       {allUsers && <DataGrid
         rows={allUsers}
         columns={UsersColumns()}
+        onRowSelectionModelChange={(newSelection) => {
+            setSelectedRows(newSelection);
+          }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
       />}
