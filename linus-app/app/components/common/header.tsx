@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { PG } from '@/redux/common/enums/PG';
 import { useRouter } from 'next/navigation';
 
-const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`, `${PG.ARTICLE}/list`,`${PG.USER}/list`]
+const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/list`, `${PG.ARTICLE}/list`,`${PG.USER}/list`]
 const pages = ['회원가입','로그인', '카운터', '게시판목록','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 // const pageMap = [{key:'회원가입', value:'pages/users/join'}, 

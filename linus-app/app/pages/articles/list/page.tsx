@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import {Button, Input} from '@mui/material'
 import { API } from "@/redux/common/enums/API";
 import AxiosConfig from "@/redux/common/configs/axios-config";
@@ -18,22 +18,12 @@ import { IArticle } from "@/redux/features/articles/article.model";
 import Columns from "@/app/components/articles/ArticleColumns";
 import ArticlesColumns from "@/app/components/articles/ArticleColumns";
 
-// const Article = (v: IArticle)=>
-//     (
-        // <tr key={v.id}>
-        //     <td>{v.title}</td>
-        //     <td>{v.content}</td>
-        //     <td>{v.writer}</td>
-        //     <td>{v.registerDate}</td>
-        // </tr>
-//     )
-
-
 const ArticlesPage : NextPage = ({data}:any) => {
     const router = useRouter();
     const dispatch = useDispatch()
     // const [articles, setArticles] = useState([]) //state는 redux에서 처리했기 때문에 react에서 useState할 필요가 없음
     const allArticles: [] = useSelector(getAllArticles)
+    const [selectedRows, setSelectedRows] = useState<GridRowSelectionModel>([]);
 
     if(allArticles !== undefined){
       console.log('allArticles is not undefined')
@@ -50,19 +40,22 @@ const ArticlesPage : NextPage = ({data}:any) => {
     dispatch(findAllArticles())
   }, [])
 
-
-    // const article = [
-    //     {id : 1, title : '', content : '', writer : '', registerDate : ''}    
-    // ]
-
-    // const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
-
+  const handleDelete = async () => {
+    await Promise.all(selectedRows.map(id => axios.delete(`http://localhost:8080/api/articles/delete/${id}`)));
+    dispatch(findAllArticles(1));
+};
     return (<>
         <h2>게시글 목록</h2>
+        <span className="text-3xl justify-center flex">게시글 수 : {allArticles.length}</span>
+            <br/>
+            <Button onClick={handleDelete}>삭제</Button>
         <Box sx={{ height: '100%', width: '100%' }}>
       {allArticles && <DataGrid
         rows={allArticles}
         columns={ArticlesColumns()}
+        onRowSelectionModelChange={(newSelection) => {
+          setSelectedRows(newSelection);
+        }}
         initialState={{
           pagination: {
             paginationModel: {

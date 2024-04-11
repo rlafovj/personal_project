@@ -1,16 +1,21 @@
 'use client'
 
-import { findAllBoards } from "@/redux/features/boards/board.service"
+
+import { IBoard } from "@/redux/features/boards/board"
+import { findAllBoards, findBoardById } from "@/redux/features/boards/board.service"
+import { getBoardById } from "@/redux/features/boards/board.slice"
 import { Typography } from "@mui/material"
 import { useEffect } from "react"
+import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 
 export default function BoardDetailPage (props:any){
 
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
+    const board:IBoard=useSelector(getBoardById)
 
     useEffect(()=>{
-        dispatch(findAllBoards(props.params.id))
+        dispatch(findBoardById(props.params.id))
     }, [])
 
     return(<>
