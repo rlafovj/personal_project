@@ -8,5 +8,6 @@ export const initialState: IUser = {
     phone: '',
     address: '',
     job: '',
-    array: []
+    array: [],
+    message: ''
 }

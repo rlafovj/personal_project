@@ -18,6 +18,7 @@ const handlePending = (state : any) => {
 
 const handleFulfilled = (state:any,{payload}:any) => {
     console.log('-------------------conclusion-------------------')
+    console.log(payload)
     state.array = payload
     console.log(JSON.stringify(payload))
   }
@@ -34,8 +35,8 @@ export const boardSlice = createSlice({
         const {pending,rejected} = status;
 
     builder
-      .addCase(findAllBoards.fulfilled,handleFulfilled)
-      .addCase(findBoardById.fulfilled,handleFulfilled)
+      .addCase(findAllBoards.fulfilled, handleFulfilled)
+      .addCase(findBoardById.fulfilled,(state: any, {payload}:any )=>{state.json=payload})
     }
   }
 )

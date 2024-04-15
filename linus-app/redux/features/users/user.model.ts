@@ -7,4 +7,5 @@ export interface IUser{
     address: string,
     job: string,
     array: []
+    message?: string
 }

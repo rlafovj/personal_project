@@ -11,3 +11,13 @@ export const findAllUsersAPI = async(page: number)=>{
         return error
     }
 }
+export const loginAPI = async(userCredentials: {username: string, password: string})=>{
+    try {
+        const response = await instance.post('/users/login', userCredentials)
+        console.log(response.data.message)
+        return response.data.message
+    } catch (error) {
+        console.log("loginAPI Error : "+error)
+        return error
+    }
+}
