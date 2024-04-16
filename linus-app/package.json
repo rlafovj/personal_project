@@ -24,7 +24,8 @@
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-redux": "^9.1.0",
     "redux-actions": "3.0.0",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "nookies":"2.5.2"
   },
   "devDependencies": {
     "@reduxjs/toolkit": "2.2.2",

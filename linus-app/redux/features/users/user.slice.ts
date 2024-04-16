@@ -1,11 +1,30 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { initialState } from './user.init'
 import { findAllUsers, login } from './user.service'
+import { IUser } from './user.model'
 
 const status = {
     pending: "pending",
     fulfilled: "fulfilled",
     rejected: "rejected"
+}
+
+interface IAuth{
+    message?: string,
+    token?: string
+}
+
+interface UserState {
+    array? : Array<IUser>,
+    json? : IUser,
+    auth? : IAuth
+}
+
+export const inintialState: UserState = {
+    array: [],
+    json: {} as IUser,
+    auth: {} as IAuth
+
 }
 
 const handlePending = ()=>{
@@ -28,8 +47,8 @@ export const userSlice = createSlice({
         const {pending, rejected} = status;
 
     builder
-    .addCase(findAllUsers.fulfilled, handleFulfilled)
-    .addCase(login.fulfilled, (state: any, {payload}:any )=>{state.message=payload})
+    .addCase(findAllUsers.fulfilled, (state: any, {payload}:any )=>{state.array=payload})
+    .addCase(login.fulfilled, (state: any, {payload}:any )=>{state.auth=payload})
     }
 })
 
@@ -37,10 +56,10 @@ export const AllUsers = (state:any)=>{
     console.log('------------------Before useSelector--------------------')
     return state.user.array;
 }
-export const getLogin = (state: any) => (
+export const getAuth = (state: any) => (
     // console.log('------------------ Before Login useSelector ---------------')
     // console.log(JSON.stringify(state.user.message))
-    state.user.message)
+    state.user.auth)
   
 
 export const {} = userSlice.actions

@@ -15,7 +15,7 @@ export const loginAPI = async(userCredentials: {username: string, password: stri
     try {
         const response = await instance.post('/users/login', userCredentials)
         console.log(response.data.message)
-        return response.data.message
+        return response.data
     } catch (error) {
         console.log("loginAPI Error : "+error)
         return error
